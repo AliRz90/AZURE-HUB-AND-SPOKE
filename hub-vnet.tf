@@ -54,9 +54,9 @@ resource "azurerm_route_table" "spoke1-rt" {
   bgp_route_propagation_enabled = false
 
   route {
-    name           = "default"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "VirtualAppliance"
+    name                   = "default"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = azurerm_firewall.hub_fw.ip_configuration[0].private_ip_address
   }
 

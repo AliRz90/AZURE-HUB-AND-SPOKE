@@ -3,7 +3,7 @@ locals {
   spoke1-resource-group = "spoke1-vnet-rg"
   prefix-spoke1         = "spoke1"
 
-custom_data = <<CUSTOM_DATA
+  custom_data = <<CUSTOM_DATA
 #!/bin/bash
 sudo apt update -y
 sudo apt-get -y install nginx

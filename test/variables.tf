@@ -51,7 +51,7 @@ variable "sharedServices_subnet" {
   description = "The address prefixes for the subnets"
   type        = map(list(string))
   default = {
-    snet-appgateway           = ["10.1.0.0/24"]
+    snet-appgateway = ["10.1.0.0/24"]
   }
 }
 

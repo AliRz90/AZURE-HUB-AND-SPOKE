@@ -121,7 +121,7 @@ resource "azurerm_application_gateway" "sharedServices_agw" {
   }
 
   backend_address_pool {
-    name = "test-beap"
+    name         = "test-beap"
     ip_addresses = azurerm_linux_virtual_machine.spoke1-vm.private_ip_addresses
   }
 

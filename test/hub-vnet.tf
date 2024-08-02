@@ -12,7 +12,7 @@ locals {
     #contact     = "" # Set contact information for the deployment, such as "john.doe@mail.com"
   }
 
-custom_data = <<CUSTOM_DATA
+  custom_data = <<CUSTOM_DATA
 #!/bin/bash
 sudo apt update -y
 sudo apt-get -y install nginx
