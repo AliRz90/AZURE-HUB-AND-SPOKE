@@ -4,6 +4,14 @@
 
 locals {
   prefix-sharedServices = "sharedServices${var.name}"
+
+  backend_address_pool_name      = local.backend_address_pool_name
+  frontend_port_name             = local.frontend_port_name
+  frontend_ip_configuration_name = local.frontend_ip_configuration_name
+  http_setting_name              = local.http_setting_name
+  listener_name                  = local.listener_name
+  request_routing_rule_name      = "${var.app_name}-rqrt"
+  redirect_configuration_name    = "${var.app_name}-rdrcfg"
 }
 
 #--------------------------------------------
@@ -111,22 +119,22 @@ resource "azurerm_application_gateway" "sharedServices_agw" {
   }
 
   frontend_port {
-    name = "test-feport"
+    name = local.frontend_port_name
     port = 80
   }
 
   frontend_ip_configuration {
-    name                 = "test-feip"
+    name                 = local.frontend_ip_configuration_name
     public_ip_address_id = azurerm_public_ip.agw_pip.id
   }
 
   backend_address_pool {
-    name         = "test-beap"
+    name         = local.backend_address_pool_name
     ip_addresses = azurerm_linux_virtual_machine.spoke1-vm.private_ip_addresses
   }
 
   backend_http_settings {
-    name                  = "test-be-htst"
+    name                  = local.http_setting_name
     cookie_based_affinity = "Disabled"
     port                  = 80
     protocol              = "Http"
@@ -134,18 +142,18 @@ resource "azurerm_application_gateway" "sharedServices_agw" {
   }
 
   http_listener {
-    name                           = "test-httplstn"
-    frontend_ip_configuration_name = "test-feip"
-    frontend_port_name             = "test-feport"
+    name                           = local.listener_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
     protocol                       = "Http"
   }
 
   request_routing_rule {
-    name                       = "test-rqrt"
+    name                       = local.request_routing_rule_name
     priority                   = 9
     rule_type                  = "Basic"
-    http_listener_name         = "test-httplstn"
-    backend_address_pool_name  = "test-beap"
-    backend_http_settings_name = "test-be-htst"
+    http_listener_name         = local.listener_name
+    backend_address_pool_name  = local.backend_address_pool_name
+    backend_http_settings_name = local.http_setting_name
   }
 }

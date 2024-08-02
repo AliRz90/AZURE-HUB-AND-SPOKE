@@ -18,6 +18,11 @@ variable "name" {
 
 }
 
+variable "app_name" {
+  description = "The application name"
+  type        = string
+}
+
 #---------------------------
 # Hub Network Variables
 #---------------------------
@@ -52,6 +57,7 @@ variable "sharedServices_subnet" {
 #---------------------------
 # Spoke1 VM Variables
 #---------------------------
+
 variable "username" {
   description = "Username for Virtual Machines"
   type        = string
