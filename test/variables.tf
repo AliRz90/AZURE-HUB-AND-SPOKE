@@ -15,7 +15,7 @@ variable "environment" {
 variable "name" {
   description = "The name of the resource group"
   type        = string
-  default     = "npc"
+  default     = "NovaPlexCloud"
 }
 
 #---------------------------
@@ -32,7 +32,8 @@ variable "hub_subnet" {
   type        = map(list(string))
   default = {
     AzureFirewallSubnet = ["10.0.0.0/26"]
-    ManagementSubnet    = ["10.0.1.0/24"]
+    AGSSubnet           = ["10.0.1.0/24"]
+    ManagementSubnet    = ["10.0.2.0/24"]
   }
 }
 
